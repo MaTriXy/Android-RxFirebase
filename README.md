@@ -1,3 +1,6 @@
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
+[ ![Download](https://api.bintray.com/packages/spirosoik/maven/rxfirebase/images/download.svg) ](https://bintray.com/spirosoik/maven/rxfirebase/_latestVersion)
+
 # RxFirebase
 
 RxJava implementation for the Android [Firebase client](https://www.firebase.com/docs/android/).
@@ -50,3 +53,5 @@ public class MainActivity extends AppCompatActivity {
   }
 }
 ```
+
+This project still in very early stage, and welcome the pull request
