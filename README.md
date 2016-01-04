@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/spirosoik/maven/rxfirebase/images/download.svg) ](https://bintray.com/spirosoik/maven/rxfirebase/_latestVersion)
+
 # RxFirebase
 
 RxJava implementation for the Android [Firebase client](https://www.firebase.com/docs/android/).
