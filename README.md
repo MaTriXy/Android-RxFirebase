@@ -21,7 +21,7 @@ allprojects {
 In your app build.gradle (or explicit module) you must add this:
 ```
 dependencies {
-	compile 'com.ragnarok.rxcamera:lib:0.0.1'
+  compile 'com.soikonomakis:rxfirebase:0.0.1'
 }
 ```
 
