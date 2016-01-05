@@ -1,6 +1,6 @@
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
 [ ![Download](https://api.bintray.com/packages/spirosoik/maven/rxfirebase/images/download.svg) ](https://bintray.com/spirosoik/maven/rxfirebase/_latestVersion)
-
+[![Build Status](https://circleci.com/gh/spirosoik/Android-RxFirebase/tree/master.svg?style=shield&circle-token=55bc5669774dd618582c18e1a6b3a8d4e3ae1de7)](https://circleci.com/gh/spirosoik/Android-RxFirebase/tree/master)
 # RxFirebase
 
 RxJava implementation for the Android [Firebase client](https://www.firebase.com/docs/android/).
