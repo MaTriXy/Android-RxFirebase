@@ -7,21 +7,7 @@ RxJava implementation for the Android [Firebase client](https://www.firebase.com
 
 ----
 
-Because the project is not still published in jCenter (waiting for approval) add these to your project dependence:
-
-In parent build.gradle add this:
-```
-allprojects {
-  repositories {
-    jcenter()
-    maven {
-      url  "http://dl.bintray.com/spirosoik/maven"
-    }
-  }
-}
-```
-
-In your app build.gradle (or explicit module) you must add this:
+The project is available on jCenter. In your app build.gradle (or explicit module) you must add this:
 ```
 dependencies {
   compile 'com.soikonomakis:rxfirebase:0.0.1'
