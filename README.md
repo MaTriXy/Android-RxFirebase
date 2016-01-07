@@ -40,4 +40,4 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-This project still in very early stage, and welcome the pull request
+This project still in very early stage and you are welcome to send a pull request.
