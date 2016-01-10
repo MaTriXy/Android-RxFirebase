@@ -40,6 +40,12 @@ android {
   }
 }
 
+tasks.withType(Test) {
+  testLogging {
+    events "started", "passed", "skipped", "failed"
+  }
+}
+
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   compile 'com.firebase:firebase-client-android:2.5.0+'

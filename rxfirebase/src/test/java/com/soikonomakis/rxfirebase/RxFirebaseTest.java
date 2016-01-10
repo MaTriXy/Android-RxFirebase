@@ -4,6 +4,7 @@ import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import java.util.Collections;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,7 +15,11 @@ import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class RxFirebaseTest extends ApplicationTestCase {
@@ -34,6 +39,11 @@ public class RxFirebaseTest extends ApplicationTestCase {
     spyRxFirebase = spy(rxFirebase);
   }
 
+  @After public void destroy() throws NoSuchFieldException, IllegalAccessException {
+    resetSingleton(RxFirebase.class);
+    spyRxFirebase = null;
+  }
+
   @Test public void testObserveOauthWithToken() throws InterruptedException {
     when(spyRxFirebase.observeAuthWithOauthToken(mockRef, "test", "google")).thenReturn(
         Observable.just(mockAuthData));
@@ -48,6 +58,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockAuthData));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase).observeAuthWithOauthToken(mockRef, "test", "google");
   }
 
   @Test public void testObserveValue() throws InterruptedException {
@@ -63,6 +75,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockDataSnapshot));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase).observeValueEvent(mockRef);
   }
 
   @Test public void testObserveChildValue() {
@@ -79,6 +93,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockFirebaseChildEvent));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase).observeChildEvent(mockRef);
   }
 
   @Test public void testObserveSingleValue() {
@@ -94,6 +110,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockDataSnapshot));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase).observeSingleValue(mockRef);
   }
 
   @Test public void testObserveChildAdded() {
@@ -111,6 +129,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockFirebaseChildEvent));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase, atMost(2)).observeChildAdded(mockRef);
   }
 
   @Test public void testObserveChildRemoved() {
@@ -128,6 +148,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockFirebaseChildEvent));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase, atMost(2)).observeChildRemoved(mockRef);
   }
 
   @Test public void testObserveChildChanged() {
@@ -145,6 +167,8 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockFirebaseChildEvent));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase, atMost(2)).observeChildChanged(mockRef);
   }
 
   @Test public void testObserveChildMoved() {
@@ -162,5 +186,7 @@ public class RxFirebaseTest extends ApplicationTestCase {
     testSubscriber.assertReceivedOnNext(Collections.singletonList(mockFirebaseChildEvent));
     testSubscriber.assertCompleted();
     testSubscriber.unsubscribe();
+
+    verify(spyRxFirebase, atMost(2)).observeChildMoved(mockRef);
   }
 }
