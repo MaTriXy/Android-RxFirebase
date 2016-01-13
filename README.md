@@ -11,7 +11,7 @@ RxJava implementation for the Android [Firebase client](https://www.firebase.com
 The project is available on jCenter. In your app build.gradle (or explicit module) you must add this:
 ```
 dependencies {
-  compile 'com.soikonomakis:rxfirebase:0.0.1'
+  compile 'com.soikonomakis:rxfirebase:0.0.2'
 }
 ```
 
