@@ -109,7 +109,6 @@ public class RxFirebase {
         final ValueEventListener listener = new ValueEventListener() {
           @Override public void onDataChange(DataSnapshot dataSnapshot) {
             subscriber.onNext(dataSnapshot);
-            subscriber.onCompleted();
           }
 
           @Override public void onCancelled(FirebaseError error) {
@@ -141,17 +140,24 @@ public class RxFirebase {
   public Observable<DataSnapshot> observeSingleValue(final Query ref) {
     return Observable.create(new Observable.OnSubscribe<DataSnapshot>() {
       @Override public void call(final Subscriber<? super DataSnapshot> subscriber) {
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        final ValueEventListener valueEventListener = new ValueEventListener() {
           @Override public void onDataChange(DataSnapshot dataSnapshot) {
             subscriber.onNext(dataSnapshot);
-            subscriber.onCompleted();
           }
 
           @Override public void onCancelled(FirebaseError error) {
             // Turn the FirebaseError into a throwable to conform to the API
             subscriber.onError(new FirebaseException(error.getMessage()));
           }
-        });
+        };
+        ref.addListenerForSingleValueEvent(valueEventListener);
+
+        // When the subscription is cancelled, remove the listener
+        subscriber.add(Subscriptions.create(new Action0() {
+          @Override public void call() {
+            ref.removeEventListener(valueEventListener);
+          }
+        }));
       }
     });
   }
